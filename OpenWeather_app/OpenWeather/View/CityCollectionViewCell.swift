@@ -14,10 +14,8 @@ class CityCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
                     
-        // Apply a corner radius and border
+        // Apply a corner radius
         layer.cornerRadius = 10.0
-        layer.borderWidth = 1.0
-        layer.borderColor = UIColor(named: "AccentColor")?.cgColor
         layer.masksToBounds = true
         
         // Apply a shadow

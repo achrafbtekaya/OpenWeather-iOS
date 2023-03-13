@@ -15,13 +15,13 @@ open class OpenWeatherAPIs {
     }
     
     public enum Result {
-        case success(URLResponse?, NSDictionary?)
+        case Success(URLResponse?, Data?)
         case Error(URLResponse?, NSError?)
         
-        public func data() -> NSDictionary? {
+        public func data() -> Data? {
             switch self {
-            case .success(_, let dictionary):
-                return dictionary
+            case .Success(_, let data):
+                return data
             case .Error(_, _):
                 return nil
             }
@@ -29,7 +29,7 @@ open class OpenWeatherAPIs {
         
         public func response() -> URLResponse? {
             switch self {
-            case .success(let response, _):
+            case .Success(let response, _):
                 return response
             case .Error(let response, _):
                 return response
@@ -38,7 +38,7 @@ open class OpenWeatherAPIs {
         
         public func error() -> NSError? {
             switch self {
-            case .success(_, _):
+            case .Success(_, _):
                 return nil
             case .Error(_, let error):
                 return error
@@ -89,19 +89,10 @@ open class OpenWeatherAPIs {
         // Create a data task with the URLRequest and a completion handler.
         let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
             var error: NSError? = error as NSError?
-            var dictionary: NSDictionary?
             
-            // If there is data returned, try to deserialize it into an NSDictionary.
-            if let data = data {
-                do {
-                    dictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSDictionary
-                } catch let e as NSError {
-                    error = e
-                }
-            }
             // Add the callback function to the current operation queue with the appropriate Result object.
             currentQueue?.addOperation {
-                var result = Result.success(response, dictionary)
+                var result = Result.Success(response, data)
                 if error != nil {
                     result = Result.Error(response, error)
                 }
