@@ -41,45 +41,24 @@ self.language = language
 }
 
 /**
-Retrieves the current weather data for the specified city.
+Retrieves the weather data for the specified city.
 
 Parameters:
-cityName: The name of the city to retrieve weather data for.
+latitude: The latitude of the city to retrieve weather data for.
+longitude: The longitude of the city to retrieve weather data for.
 callback: A callback function to be called with the result of the API request.
 */
-open func currentWeather(_ cityName: String, callback: @escaping (Result) -> ()) {
+open func retreiveWeatherData(_ latitude: Double, _ longitude: Double, callback: @escaping (Result) -> ()) {
+call("/onecall?lat=\(latitude)&lon=\(longitude)", callback: callback)
+}
+
+/**
+Retrieves the latitude and longitude of the specified city.
+
+Parameters:
+cityName: The name of the city to retrieve coordinates for.
+callback: A callback function to be called with the result of the API request.
+*/
+open func findCityCoordinates (_ cityName: String, callback: @escaping (Result) -> ()) {
 call("/weather?q=(cityName.replaceWhitespace())", callback: callback)
-}
-
-/**
-Retrieves the daily forecast for the specified city.
-
-Parameters:
-cityName: The name of the city to retrieve weather data for.
-callback: A callback function to be called with the result of the API request.
-*/
-open func dailyForecast(_ cityName: String, callback: @escaping (Result) -> ()) {
-call("/forecast/daily?q=(cityName.replaceWhitespace())", callback: callback)
-}
-
-/**
-Retrieves the forecast for the specified city.
-
-Parameters:
-cityName: The name of the city to retrieve weather data for.
-callback: A callback function to be called with the result of the API request.
-*/
-open func forecast(_ cityName: String, callback: @escaping (Result) -> ()) {
-call("/forecast?q=(cityName.replaceWhitespace())", callback: callback)
-}
-
-/**
-Retrieves the city data for the specified city.
-
-Parameters:
-cityName: The name of the city to retrieve data for.
-callback: A callback function to be called with the result of the API request.
-*/
-open func findCity(_ cityName: String, callback: @escaping (Result) -> ()) {
-call("/find?q=(cityName.replaceWhitespace())", callback: callback)
 }

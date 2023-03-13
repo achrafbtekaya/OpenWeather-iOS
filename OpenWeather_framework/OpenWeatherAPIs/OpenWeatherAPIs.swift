@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 open class OpenWeatherAPIs {
     public enum TemperatureFormat: String {
@@ -51,7 +52,7 @@ open class OpenWeatherAPIs {
     open var temperatureFormat: TemperatureFormat
     
     fileprivate struct Const {
-        static let basePath = "http://api.openweathermap.org/data/"
+        static let basePath = "https://api.openweathermap.org/data/"
     }
     
     // MARK: - Initialization
@@ -63,28 +64,16 @@ open class OpenWeatherAPIs {
         self.language = language
     }
     
-    // MARK: - Retrieving current weather data
+    // MARK: - Retrieving city weather data
     
-    open func currentWeather(_ cityName: String, callback: @escaping (Result) -> ()) {
-        call("/weather?q=\(cityName.replaceWhitespace())", callback: callback)
-    }
-    
-    // MARK: - Retrieving daily forecast
-    
-    open func dailyForecast(_ cityName: String, callback: @escaping (Result) -> ()) {
-        call("/forecast/daily?q=\(cityName.replaceWhitespace())", callback: callback)
+    open func retreiveWeatherData(_ latitude: Double, _ longitude: Double, callback: @escaping (Result) -> ()) {
+        call("/onecall?lat=\(latitude)&lon=\(longitude)", callback: callback)
     }
         
-    // MARK: - Retrieving forecast
+    // MARK: - Retrieving city coordinates
     
-    open func forecast(_ cityName: String, callback: @escaping (Result) -> ()) {
-        call("/forecast?q=\(cityName.replaceWhitespace())", callback: callback)
-    }
-    
-    // MARK: - Retrieving city
-    
-    open func findCity(_ cityName: String, callback: @escaping (Result) -> ()) {
-        call("/find?q=\(cityName.replaceWhitespace())", callback: callback)
+    open func findCityCoordinates(_ cityName: String, callback: @escaping (Result) -> ()) {
+        call("/weather?q=\(cityName.replaceWhitespace())", callback: callback)
     }
         
     // MARK: - Call api
