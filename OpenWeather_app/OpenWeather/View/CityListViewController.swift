@@ -10,9 +10,10 @@ import UIKit
 // MARK: - Main Class
 class CityListViewController: UIViewController {
     
-    
     @IBOutlet weak var cityNavigationItem: UINavigationItem!
     @IBOutlet weak var cityCollectionView: UICollectionView!
+    
+    var cityListViewModel = CityListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,21 +31,37 @@ class CityListViewController: UIViewController {
          alertController.addTextField { (textField : UITextField!) -> Void in
              textField.placeholder = "City Name"
          }
+        
          let saveAction = UIAlertAction(title: "Add", style: .default, handler: { alert -> Void in
              let firstTextField = alertController.textFields![0] as UITextField
-             print("City Name: \(firstTextField.text)")
-             guard let cityname = firstTextField.text else { return }
+             let cityname = firstTextField.text ?? ""
+             print("City Name: \(cityname)")
              
+             self.cityListViewModel.getCityInfoFromName(cityName: cityname) { city in
+                 if city != nil {
+                     let isExist = (Variables.cityList.firstIndex{ $0.id == city!.id } ?? -1) > -1
+                     if(!isExist) {
+                         Variables.cityList.append(city!)
+                         self.cityCollectionView.reloadData()
+                     }
+                 } else {
+                     self.showErrorAlert()
+                 }
+             }
          })
-         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action : UIAlertAction!) -> Void in
-            print("Cancel")
-         })
+         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
 
 
          alertController.addAction(saveAction)
          alertController.addAction(cancelAction)
 
          self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showErrorAlert() {
+        let alertContoller = UIAlertController (title: "Unable to Add City" , message: "An error occurred while adding this city. Please check your city name." , preferredStyle: .alert)
+        alertContoller.addAction(UIAlertAction(title: "OK", style:.default , handler: nil))
+        self.present(alertContoller , animated: true, completion: nil)
     }
 }
 

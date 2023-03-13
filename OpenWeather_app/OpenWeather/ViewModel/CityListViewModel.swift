@@ -15,18 +15,19 @@ class CityListViewModel {
         openweather = OpenWeatherAPIs(apiKey: Constants.API_KEY)
     }
     
-    func getCityInfoFromName(cityName: String){
+    func getCityInfoFromName(cityName: String, callback: @escaping (City?) -> ()){
         openweather.findCityCoordinates(cityName) { result in
             do {
-                if (result.error() != nil || result.data() == nil){ //|| (result.data() as City) != 200) {
-                    print("error")
+                if (result.error() != nil || result.data() == nil) {
+                    callback(nil)
                 } else {
-                    let city = try JSONDecoder().decode(City.self, from: result.data()!)
-
-                    print(result.data())
+                    let jsonData = try JSONSerialization.data(withJSONObject: result.data()!)
+                    let city = try JSONDecoder().decode(City.self, from: jsonData)
+                    callback(city)
                 }
             } catch let error as NSError {
                 print(error)
+                callback(nil)
             }
         }
     }

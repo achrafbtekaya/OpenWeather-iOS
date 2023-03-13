@@ -15,13 +15,13 @@ open class OpenWeatherAPIs {
     }
     
     public enum Result {
-        case Success(URLResponse?, Data?)
+        case Success(URLResponse?, NSDictionary?)
         case Error(URLResponse?, NSError?)
         
-        public func data() -> Data? {
+        public func data() -> NSDictionary? {
             switch self {
-            case .Success(_, let data):
-                return data
+            case .Success(_, let dictionnary):
+                return dictionnary
             case .Error(_, _):
                 return nil
             }
@@ -89,10 +89,19 @@ open class OpenWeatherAPIs {
         // Create a data task with the URLRequest and a completion handler.
         let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
             var error: NSError? = error as NSError?
+            var dictionary: NSDictionary?
             
+            // If there is data returned, try to deserialize it into an NSDictionary.
+            if let data = data {
+                do {
+                    dictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSDictionary
+                } catch let e as NSError {
+                    error = e
+                }
+            }
             // Add the callback function to the current operation queue with the appropriate Result object.
             currentQueue?.addOperation {
-                var result = Result.Success(response, data)
+                var result = Result.Success(response, dictionary)
                 if error != nil {
                     result = Result.Error(response, error)
                 }

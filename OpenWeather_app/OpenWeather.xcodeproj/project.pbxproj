@@ -24,6 +24,7 @@
 		522840E929BF263D00756001 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522840E829BF263C00756001 /* Weather.swift */; };
 		522840EB29BF2A0A00756001 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522840EA29BF2A0A00756001 /* Variables.swift */; };
 		522840ED29BF2C1000756001 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522840EC29BF2C1000756001 /* CityCollectionViewCell.swift */; };
+		527DAC8B29BF5F32000A36B1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527DAC8A29BF5F32000A36B1 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		522840E829BF263C00756001 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		522840EA29BF2A0A00756001 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		522840EC29BF2C1000756001 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
+		527DAC8A29BF5F32000A36B1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 			children = (
 				522840E029BF1CF000756001 /* Contsants.swift */,
 				522840EA29BF2A0A00756001 /* Variables.swift */,
+				527DAC8A29BF5F32000A36B1 /* Extensions.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				522840E729BF252C00756001 /* City.swift in Sources */,
 				522840EB29BF2A0A00756001 /* Variables.swift in Sources */,
 				522840E529BF251100756001 /* CityListViewModel.swift in Sources */,
+				527DAC8B29BF5F32000A36B1 /* Extensions.swift in Sources */,
 				5228408229BEB85800756001 /* SceneDelegate.swift in Sources */,
 				522840E129BF1CF000756001 /* Contsants.swift in Sources */,
 				522840ED29BF2C1000756001 /* CityCollectionViewCell.swift in Sources */,
