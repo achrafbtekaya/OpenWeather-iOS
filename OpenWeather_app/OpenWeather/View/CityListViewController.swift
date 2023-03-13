@@ -13,13 +13,16 @@ class CityListViewController: UIViewController {
     @IBOutlet weak var cityNavigationItem: UINavigationItem!
     @IBOutlet weak var cityCollectionView: UICollectionView!
     
-    var cityListViewModel = CityListViewModel()
+    var cityListViewModel: CityListViewModel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
-
+        
+        cityListViewModel = CityListViewModel()
+        
         cityCollectionView.delegate = self
         cityCollectionView.dataSource = self
         
@@ -39,11 +42,8 @@ class CityListViewController: UIViewController {
              
              self.cityListViewModel.getCityInfoFromName(cityName: cityname) { city in
                  if city != nil {
-                     let isExist = (Variables.cityList.firstIndex{ $0.id == city!.id } ?? -1) > -1
-                     if(!isExist) {
-                         Variables.cityList.append(city!)
-                         self.cityCollectionView.reloadData()
-                     }
+                     self.cityListViewModel.addNewCity(city: city!)
+                     self.cityCollectionView.reloadData()
                  } else {
                      self.showErrorAlert()
                  }
@@ -62,6 +62,12 @@ class CityListViewController: UIViewController {
         let alertContoller = UIAlertController (title: "Unable to Add City" , message: "An error occurred while adding this city. Please check your city name." , preferredStyle: .alert)
         alertContoller.addAction(UIAlertAction(title: "OK", style:.default , handler: nil))
         self.present(alertContoller , animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowWeatherDetails", let dest = segue.destination as? CityDetailsViewController, let cell = sender as? UICollectionViewCell {
+            dest.indexPath = self.cityCollectionView.indexPath(for: cell)!
+        }
     }
 }
 
@@ -87,5 +93,10 @@ extension CityListViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         return CGSize(width: collectionView.bounds.size.width, height: 65)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowWeatherDetails", sender: collectionView.cellForItem(at: indexPath))
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

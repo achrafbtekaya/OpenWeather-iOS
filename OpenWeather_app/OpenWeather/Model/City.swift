@@ -10,19 +10,19 @@ import Foundation
 // MARK: - City
 struct City: Codable {
     let coord: Coord
-    let weather: [Weather]
-    let base: String
-    let main: Main
-    let visibility: Int
-    let wind: Wind
+    let weather: [Weather]?
+    let base: String?
+    let main: Main?
+    let visibility: Int?
+    let wind: Wind?
     let rain: Rain?
-    let clouds: Clouds
-    let dt: Int
+    let clouds: Clouds?
+    let dt: Int?
     let sys: Sys
-    let timezone: Int
+    let timezone: Int?
     let id: Int
     let name: String
-    let cod: Int
+    let cod: Int?
 
     enum CodingKeys: String, CodingKey {
         case coord, weather, base, main, visibility, wind, rain, clouds, dt, sys, timezone, id, name, cod

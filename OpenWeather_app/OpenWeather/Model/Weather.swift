@@ -61,11 +61,11 @@ struct Clouds: Codable {
 
 // MARK: - Sys
 struct Sys: Codable {
-    let type: Int
-    let id: Int
+    let type: Int?
+    let id: Int?
     let country: String
-    let sunrise: Int
-    let sunset: Int
+    let sunrise: Int?
+    let sunset: Int?
 }
 
 // MARK: - WeatherData

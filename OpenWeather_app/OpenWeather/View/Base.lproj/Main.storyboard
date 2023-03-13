@@ -87,11 +87,28 @@
                     <connections>
                         <outlet property="cityCollectionView" destination="AcY-k6-zXx" id="a5g-5b-NGG"/>
                         <outlet property="cityNavigationItem" destination="IjZ-qP-xaY" id="okg-eM-1I2"/>
+                        <segue destination="Bhk-Tu-eEd" kind="show" identifier="ShowWeatherDetails" id="Ozc-7b-FPS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZjZ-mS-cEq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1513.7404580152672" y="24.647887323943664"/>
+        </scene>
+        <!--City Details View Controller-->
+        <scene sceneID="0Ub-Oc-PKR">
+            <objects>
+                <viewController id="Bhk-Tu-eEd" customClass="CityDetailsViewController" customModule="OpenWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FvJ-2h-MwW">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="S34-mr-7Fx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="NMN-nE-IG9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VAw-db-oV7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2608" y="25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Vld-lL-MTC">
