@@ -379,13 +379,6 @@
                                                             <constraint firstAttribute="height" constant="1" id="77B-RS-15w"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c2m-Qd-Sw8">
-                                                        <rect key="frame" x="20" y="200" width="293" height="1"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="sjW-JV-cch"/>
-                                                        </constraints>
-                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JU5-Vw-6Mc">
                                                         <rect key="frame" x="15" y="148" width="303" height="48"/>
                                                         <subviews>
@@ -437,6 +430,13 @@
                                                             <constraint firstAttribute="trailing" secondItem="hq6-Id-L0a" secondAttribute="trailing" id="m1R-C7-Hmq"/>
                                                             <constraint firstItem="H04-yN-br2" firstAttribute="centerY" secondItem="Ak6-f5-dnP" secondAttribute="centerY" id="uoZ-2w-0lz"/>
                                                             <constraint firstItem="Qof-MO-LAw" firstAttribute="leading" secondItem="JU5-Vw-6Mc" secondAttribute="leading" id="v8S-n4-SZj"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c2m-Qd-Sw8">
+                                                        <rect key="frame" x="20" y="200" width="293" height="1"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="sjW-JV-cch"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kPy-jK-C6c">
@@ -552,6 +552,13 @@
                                                             <constraint firstItem="swt-CT-s2D" firstAttribute="centerY" secondItem="0V0-9x-Li3" secondAttribute="centerY" id="z9R-k3-sAF"/>
                                                         </constraints>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPD-hQ-qd7">
+                                                        <rect key="frame" x="20" y="312" width="293" height="1"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="mJA-oU-N1a"/>
+                                                        </constraints>
+                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FZK-8v-aZH">
                                                         <rect key="frame" x="15" y="260" width="303" height="48"/>
                                                         <subviews>
@@ -663,13 +670,6 @@
                                                             <constraint firstItem="shx-IZ-kMu" firstAttribute="top" secondItem="4ui-FF-bmC" secondAttribute="top" constant="4" id="rg8-Y7-zTb"/>
                                                             <constraint firstItem="y6G-6L-py1" firstAttribute="centerY" secondItem="shx-IZ-kMu" secondAttribute="centerY" id="uRg-6g-rWo"/>
                                                             <constraint firstItem="QN2-10-xsC" firstAttribute="centerY" secondItem="shx-IZ-kMu" secondAttribute="centerY" id="vQN-cX-PGv"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPD-hQ-qd7">
-                                                        <rect key="frame" x="20" y="312" width="293" height="1"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="mJA-oU-N1a"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -904,6 +904,58 @@
                     <size key="freeformSize" width="393" height="2000"/>
                     <connections>
                         <outlet property="cityDetailsNavItem" destination="NMN-nE-IG9" id="dWs-cT-esW"/>
+                        <outlet property="fifthDayDate" destination="C91-Wa-pdm" id="xMh-mL-QXb"/>
+                        <outlet property="fifthDayIcon" destination="0V0-9x-Li3" id="mQj-1L-2MI"/>
+                        <outlet property="fifthDayTitle" destination="swt-CT-s2D" id="mce-db-xxJ"/>
+                        <outlet property="fifthTempMax" destination="aYv-NX-A2r" id="NWq-qr-9TL"/>
+                        <outlet property="fifthTempMin" destination="6Es-7n-Peo" id="fet-8t-Jlp"/>
+                        <outlet property="firstDayDate" destination="7si-5O-FIc" id="V24-bq-8eX"/>
+                        <outlet property="firstDayIcon" destination="7Vi-If-bh0" id="Tnx-7H-ajm"/>
+                        <outlet property="firstDayTitle" destination="sBm-la-xhr" id="wWQ-7q-l32"/>
+                        <outlet property="firstHourIcon" destination="xu1-KC-FSG" id="t4u-un-i5L"/>
+                        <outlet property="firstHourTemp" destination="FYs-uO-9m7" id="T4g-3S-CXO"/>
+                        <outlet property="firstHourTitle" destination="FsL-bk-tgN" id="o8F-tL-D5W"/>
+                        <outlet property="firstTempMax" destination="mSy-9c-hA5" id="Nba-3o-1PJ"/>
+                        <outlet property="firstTempMin" destination="1nn-gI-lzQ" id="GxZ-1Y-whk"/>
+                        <outlet property="forthDayDate" destination="WYA-8K-5gh" id="z0g-sZ-dPc"/>
+                        <outlet property="forthDayIcon" destination="rdz-pD-rYt" id="Ljx-hI-bWI"/>
+                        <outlet property="forthDayTitle" destination="hx4-vA-pR7" id="DdH-I6-b5m"/>
+                        <outlet property="forthTempMax" destination="78g-by-bzm" id="LKF-Am-eiB"/>
+                        <outlet property="forthTempMin" destination="VJe-A5-PFl" id="iY8-lr-PuG"/>
+                        <outlet property="humidityText" destination="3zq-Ir-XXV" id="GTc-ao-gHe"/>
+                        <outlet property="rainText" destination="VQG-tM-kb1" id="e2V-xI-Eyf"/>
+                        <outlet property="realFeelText" destination="C9E-yd-cDH" id="SMv-C8-ugx"/>
+                        <outlet property="secondDayDate" destination="axG-XP-095" id="qg1-Nl-xxh"/>
+                        <outlet property="secondDayIcon" destination="UUc-vD-Zs9" id="bqF-8t-5wt"/>
+                        <outlet property="secondDayTitle" destination="Prv-if-IGa" id="mNL-jm-aUP"/>
+                        <outlet property="secondHourIcon" destination="RSB-UD-o06" id="nv8-c9-VeT"/>
+                        <outlet property="secondHourTemp" destination="Vbu-R1-A3o" id="jx3-uZ-A0K"/>
+                        <outlet property="secondHourTitle" destination="XGX-Y0-alb" id="5Pi-UK-fAG"/>
+                        <outlet property="secondTempMax" destination="PfQ-uP-hw0" id="fhQ-j2-lYO"/>
+                        <outlet property="secondTempMin" destination="hko-MZ-Gaa" id="bek-tz-CW5"/>
+                        <outlet property="seventhDayDate" destination="y6G-6L-py1" id="cMa-SF-4va"/>
+                        <outlet property="seventhDayIcon" destination="shx-IZ-kMu" id="QPp-ko-hSo"/>
+                        <outlet property="seventhDayTitle" destination="87q-dm-RF7" id="OrC-qa-za5"/>
+                        <outlet property="seventhTempMax" destination="QN2-10-xsC" id="lbI-wM-mjM"/>
+                        <outlet property="seventhTempMin" destination="3YH-Js-f1I" id="Pcf-3x-Pvm"/>
+                        <outlet property="sixthDayDate" destination="Mt0-XT-CJq" id="7uI-nM-f5R"/>
+                        <outlet property="sixthDayIcon" destination="lKd-ab-Juh" id="edA-8o-i6E"/>
+                        <outlet property="sixthDayTitle" destination="VzI-nt-YfC" id="cJF-Fy-Eyd"/>
+                        <outlet property="sixthTempMax" destination="QSE-CT-tAA" id="QJv-ZU-zKy"/>
+                        <outlet property="sixthTempMin" destination="FNO-FJ-Q7T" id="Azp-k8-Mwq"/>
+                        <outlet property="thirdDayDate" destination="Qof-MO-LAw" id="YPr-0U-9dm"/>
+                        <outlet property="thirdDayIcon" destination="Ak6-f5-dnP" id="u41-Ga-qAn"/>
+                        <outlet property="thirdDayTitle" destination="EKw-Aq-ggm" id="p6V-Rc-4wI"/>
+                        <outlet property="thirdHourIcon" destination="KDh-4L-Cmr" id="TYd-qM-I8H"/>
+                        <outlet property="thirdHourTemp" destination="0ka-BI-eH9" id="jhj-30-0MJ"/>
+                        <outlet property="thirdHourTitle" destination="dDe-wC-byw" id="oTI-ar-4Se"/>
+                        <outlet property="thirdTempMax" destination="hq6-Id-L0a" id="4Gj-iP-b9C"/>
+                        <outlet property="thirdTempMin" destination="H04-yN-br2" id="23u-wf-Hfl"/>
+                        <outlet property="todayWeatherDescription" destination="2pV-yY-XNC" id="k7d-vn-Jbl"/>
+                        <outlet property="todayWeatherIcon" destination="1I0-vM-7go" id="OLK-mR-sLG"/>
+                        <outlet property="todayWeatherTemp" destination="nmQ-uV-Pew" id="pow-u1-AZv"/>
+                        <outlet property="todayWeatherTitle" destination="lvj-hd-KvJ" id="EqX-hx-zQU"/>
+                        <outlet property="windText" destination="rsp-Rp-OJb" id="uqM-hK-p1i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAw-db-oV7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

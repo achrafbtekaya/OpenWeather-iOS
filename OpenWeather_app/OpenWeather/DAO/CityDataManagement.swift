@@ -45,7 +45,7 @@ class CityDataManagement {
                     guard let country = result.value(forKey: "country") as? String else { return nil }
                     guard let latitude = result.value(forKey: "latitude") as? Double else { return nil }
                     guard let longitude = result.value(forKey: "longitude") as? Double else { return nil }
-                    let city = City(coord: Coord(lon: longitude, lat: latitude), weather: nil, base: nil, main: nil, visibility: nil, wind: nil, rain: nil, clouds: nil, dt: nil, sys: Sys(type: nil, id: nil, country: country, sunrise: nil, sunset: nil), timezone: nil, id: id, name: name, cod: nil)
+                    let city = City(coord: Coord(lon: longitude, lat: latitude), weather: nil, base: nil, main: nil, visibility: nil, wind: nil, clouds: nil, rain: nil, dt: nil, sys: Sys(country: country, sunrise: nil, sunset: nil), timezone: nil, id: id, name: name, cod: nil)
                     retrievedCities.append(city)
                 }
             }

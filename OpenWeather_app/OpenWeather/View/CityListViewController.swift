@@ -15,7 +15,6 @@ class CityListViewController: UIViewController {
     
     var cityListViewModel: CityListViewModel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
