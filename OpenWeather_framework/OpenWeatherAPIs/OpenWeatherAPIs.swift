@@ -57,7 +57,7 @@ open class OpenWeatherAPIs {
     
     // MARK: - Initialization
     
-    public init(apiKey: String, language: String = "fr", temperatureFormat: TemperatureFormat = .Celsius, apiVersion: String = "2.5") {
+    public init(apiKey: String, language: String = "en", temperatureFormat: TemperatureFormat = .Celsius, apiVersion: String = "2.5") {
         self.apiKey = apiKey
         self.temperatureFormat = temperatureFormat
         self.apiVersion = apiVersion

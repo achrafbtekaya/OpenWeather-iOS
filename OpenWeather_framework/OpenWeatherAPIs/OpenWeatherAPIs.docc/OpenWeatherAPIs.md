@@ -33,7 +33,7 @@ language: The language used for the API response.
 temperatureFormat: The temperature format used for the API response.
 apiVersion: The API version used to retrieve weather data.
 */
-public init(apiKey: String, language: String = "fr", temperatureFormat: TemperatureFormat = .Celsius, apiVersion: String = "2.5") {
+public init(apiKey: String, language: String = "en", temperatureFormat: TemperatureFormat = .Celsius, apiVersion: String = "2.5") {
 self.apiKey = apiKey
 self.temperatureFormat = temperatureFormat
 self.apiVersion = apiVersion
