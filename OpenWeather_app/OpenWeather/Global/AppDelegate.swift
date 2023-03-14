@@ -31,14 +31,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    // Define a lazy variable called `persistentContainer` of type `NSPersistentContainer`.
     lazy var persistentContainer: NSPersistentContainer = {
 
+        // Initialize a new `NSPersistentContainer` with the name "CityData".
         let container = NSPersistentContainer(name: "CityData")
+
+        // Load the persistent stores associated with the container using the `loadPersistentStores(completionHandler:)` method.
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            
+            // Check for any errors during the loading process.
             if let error = error {
+                // If an error is found, terminate the program and print an error message that includes the error information.
                 fatalError("Unresolved error, \((error as NSError).userInfo)")
             }
         })
+
+        // Return the initialized container.
         return container
     }()
 

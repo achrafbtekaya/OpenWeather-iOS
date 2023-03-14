@@ -12,10 +12,14 @@ class CityDetailsViewModel {
     var openweather: OpenWeatherAPIs
     
     init() {
+        // Create an instance of the OpenWeatherAPIs class with the API key
         openweather = OpenWeatherAPIs(apiKey: Constants.API_KEY)
     }
     
-    func getCityWeatherDetails(latitude: Double, longitude: Double, callback: @escaping (Weather?) -> ()){
+    // This function retrieves the weather details for a specific city based on its latitude and longitude
+    // It uses the OpenWeatherAPIs class to get the weather data
+    // The callback function is used to pass the weather data to the view controller
+    func getCityWeatherDetails(latitude: Double, longitude: Double, callback: @escaping (Weather?) -> ()) {
         openweather.retreiveWeatherData(latitude, longitude) { result in
             do {
                 if (result.error() != nil || result.data() == nil) {
@@ -31,5 +35,4 @@ class CityDetailsViewModel {
             }
         }
     }
-
 }
