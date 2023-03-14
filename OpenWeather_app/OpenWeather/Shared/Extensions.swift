@@ -20,3 +20,24 @@ extension Dictionary {
         throw NSError(domain: "Dictionary", code: 1, userInfo: ["message": "Data cannot be converted to .utf8 string"])
     }
 }
+
+extension Int {
+    func toTime() -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(self))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+01:00") //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "HH:mm" //Specify your format that you want
+        return dateFormatter.string(from: date)
+    }
+    
+    func toDate() -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(self))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+01:00") //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "dd/MM" //Specify your format that you want
+        return dateFormatter.string(from: date)
+    }
+
+}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - CityElement
+// MARK: - Weather
 struct Weather: Codable {
     let lat, lon: Double
     let timezone: String
@@ -113,5 +113,6 @@ struct Temp: Codable {
 
 // MARK: - Minutely
 struct Minutely: Codable {
-    let dt, precipitation: Int
+    let dt: Int
+    let precipitation: Double
 }
