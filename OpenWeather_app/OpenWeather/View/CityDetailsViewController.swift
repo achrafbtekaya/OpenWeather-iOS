@@ -9,7 +9,6 @@ import UIKit
 
 // Define a class named CityDetailsViewController that inherits from UIViewController
 class CityDetailsViewController: UIViewController {
-
     // Declare two optional variables for the CityDetailsViewModel and an IndexPath instance variable
     var cityDetailsViewModel: CityDetailsViewModel!
     var indexPath: IndexPath!
@@ -20,57 +19,23 @@ class CityDetailsViewController: UIViewController {
     @IBOutlet weak var todayWeatherIcon: UIImageView!
     @IBOutlet weak var todayWeatherDescription: UILabel!
     @IBOutlet weak var todayWeatherTemp: UILabel!
-    @IBOutlet weak var firstHourTitle: UILabel!
-    @IBOutlet weak var firstHourTemp: UILabel!
-    @IBOutlet weak var firstHourIcon: UIImageView!
-    @IBOutlet weak var secondHourIcon: UIImageView!
-    @IBOutlet weak var secondHourTitle: UILabel!
-    @IBOutlet weak var secondHourTemp: UILabel!
-    @IBOutlet weak var thirdHourTitle: UILabel!
-    @IBOutlet weak var thirdHourIcon: UIImageView!
-    @IBOutlet weak var thirdHourTemp: UILabel!
-    @IBOutlet weak var firstDayDate: UILabel!
-    @IBOutlet weak var firstTempMax: UILabel!
-    @IBOutlet weak var firstTempMin: UILabel!
-    @IBOutlet weak var firstDayIcon: UIImageView!
-    @IBOutlet weak var firstDayTitle: UILabel!
-    @IBOutlet weak var secondDayDate: UILabel!
-    @IBOutlet weak var secondTempMax: UILabel!
-    @IBOutlet weak var secondTempMin: UILabel!
-    @IBOutlet weak var secondDayIcon: UIImageView!
-    @IBOutlet weak var secondDayTitle: UILabel!
-    @IBOutlet weak var thirdDayDate: UILabel!
-    @IBOutlet weak var thirdTempMax: UILabel!
-    @IBOutlet weak var thirdTempMin: UILabel!
-    @IBOutlet weak var thirdDayIcon: UIImageView!
-    @IBOutlet weak var thirdDayTitle: UILabel!
-    @IBOutlet weak var forthDayDate: UILabel!
-    @IBOutlet weak var forthTempMax: UILabel!
-    @IBOutlet weak var forthTempMin: UILabel!
-    @IBOutlet weak var forthDayIcon: UIImageView!
-    @IBOutlet weak var forthDayTitle: UILabel!
-    @IBOutlet weak var fifthDayDate: UILabel!
-    @IBOutlet weak var fifthTempMax: UILabel!
-    @IBOutlet weak var fifthTempMin: UILabel!
-    @IBOutlet weak var fifthDayIcon: UIImageView!
-    @IBOutlet weak var fifthDayTitle: UILabel!
-    @IBOutlet weak var sixthDayDate: UILabel!
-    @IBOutlet weak var sixthTempMax: UILabel!
-    @IBOutlet weak var sixthTempMin: UILabel!
-    @IBOutlet weak var sixthDayIcon: UIImageView!
-    @IBOutlet weak var sixthDayTitle: UILabel!
-    @IBOutlet weak var seventhDayDate: UILabel!
-    @IBOutlet weak var seventhTempMax: UILabel!
-    @IBOutlet weak var seventhTempMin: UILabel!
-    @IBOutlet weak var seventhDayIcon: UIImageView!
-    @IBOutlet weak var seventhDayTitle: UILabel!
+    
+    
+    @IBOutlet weak var twentyFourHourForecastCollectionView: UICollectionView!
+    @IBOutlet weak var sevenDaysForecastTableView: UITableView!
+    
+    
     @IBOutlet weak var realFeelText: UILabel!
     @IBOutlet weak var rainText: UILabel!
     @IBOutlet weak var windText: UILabel!
     @IBOutlet weak var humidityText: UILabel!
+    
+    
     @IBOutlet weak var todayForecastView: UIView!
     @IBOutlet weak var sevenDayForecastView: UIView!
     @IBOutlet weak var airConditionView: UIView!
+    
+    var weatherDetails: Weather!
 
     // Override the viewDidLoad method of UIViewController
     override func viewDidLoad() {
@@ -84,7 +49,7 @@ class CityDetailsViewController: UIViewController {
 
         // Instantiate the CityDetailsViewModel
         cityDetailsViewModel = CityDetailsViewModel()
-        
+                
         // Set up UI elements
         setUpView()
     }
@@ -108,6 +73,7 @@ class CityDetailsViewController: UIViewController {
                 // Tries to decode the response data as a Weather object
                 let jsonData = try JSONSerialization.data(withJSONObject: data)
                 let weather = try JSONDecoder().decode(Weather.self, from: jsonData)
+                self.weatherDetails = weather
                 
                 // If the weather data is available, it will fill the views with the fetched data.
                 self.fillTodayView(weather: weather)
@@ -136,26 +102,11 @@ class CityDetailsViewController: UIViewController {
 
     // This function is responsible for filling the UI views with the data related to the weather forecast for today.
     func fillTodayForecast(weather: Weather) {
-        // Fill the first hour title label with the time of the first forecasted hour.
-        self.firstHourTitle.text = "\(weather.hourly[1].dt.toTime())"
-        // Fill the first hour icon image view with the icon corresponding to the forecasted weather.
-        self.firstHourIcon.image = UIImage(named: weather.hourly[1].weather[0].icon)
-        // Fill the first hour temperature label with the temperature in Celsius degrees.
-        self.firstHourTemp.text = "\(Int(weather.hourly[1].temp))°"
-
-        // Fill the second hour title label with the time of the second forecasted hour.
-        self.secondHourTitle.text = "\(weather.hourly[4].dt.toTime())"
-        // Fill the second hour icon image view with the icon corresponding to the forecasted weather.
-        self.secondHourIcon.image = UIImage(named: weather.hourly[4].weather[0].icon)
-        // Fill the second hour temperature label with the temperature in Celsius degrees.
-        self.secondHourTemp.text = "\(Int(weather.hourly[4].temp))°"
-
-        // Fill the third hour title label with the time of the third forecasted hour.
-        self.thirdHourTitle.text = "\(weather.hourly[7].dt.toTime())"
-        // Fill the third hour icon image view with the icon corresponding to the forecasted weather.
-        self.thirdHourIcon.image = UIImage(named: weather.hourly[7].weather[0].icon)
-        // Fill the third hour temperature label with the temperature in Celsius degrees.
-        self.thirdHourTemp.text = "\(Int(weather.hourly[7].temp))°"
+        // Table View Management
+        twentyFourHourForecastCollectionView.delegate = self
+        twentyFourHourForecastCollectionView.dataSource = self
+        twentyFourHourForecastCollectionView.backgroundColor = .clear
+        twentyFourHourForecastCollectionView.allowsSelection = false
 
         // Round the corners of the view that contains the today's forecast information.
         self.todayForecastView.layer.cornerRadius = 10
@@ -163,55 +114,11 @@ class CityDetailsViewController: UIViewController {
 
     // This function takes a Weather object as input and updates the UI with information about the seven-day forecast.
     func fillSevenDayForecast(weather: Weather) {
-        // Update the UI with information about the first day in the forecast.
-        self.firstDayDate.text = "\(weather.daily[1].dt.toDate())" // Convert Unix timestamp to a readable date string and set it as the text of a label.
-        self.firstTempMax.text = "/\(Int(weather.daily[1].temp.max))°" // Set the maximum temperature for the day as the text of a label.
-        self.firstTempMin.text = "\(Int(weather.daily[1].temp.min))°" // Set the minimum temperature for the day as the text of a label.
-        self.firstDayIcon.image = UIImage(named: weather.daily[1].weather[0].icon) // Set the weather icon for the day as the image of an ImageView.
-        self.firstDayTitle.text = "\(weather.daily[1].weather[0].main)" // Set the weather description for the day as the text of a label.
+        // Table View Management
+        sevenDaysForecastTableView.delegate = self
+        sevenDaysForecastTableView.dataSource = self
+        sevenDaysForecastTableView.backgroundColor = .clear
 
-        // Update the UI with information about the second day in the forecast.
-        self.secondDayDate.text = "\(weather.daily[2].dt.toDate())"
-        self.secondTempMax.text = "/\(Int(weather.daily[2].temp.max))°"
-        self.secondTempMin.text = "\(Int(weather.daily[2].temp.min))°"
-        self.secondDayIcon.image = UIImage(named: weather.daily[2].weather[0].icon)
-        self.secondDayTitle.text = "\(weather.daily[2].weather[0].main)"
-
-        // Update the UI with information about the third day in the forecast.
-        self.thirdDayDate.text = "\(weather.daily[3].dt.toDate())"
-        self.thirdTempMax.text = "/\(Int(weather.daily[3].temp.max))°"
-        self.thirdTempMin.text = "\(Int(weather.daily[3].temp.min))°"
-        self.thirdDayIcon.image = UIImage(named: weather.daily[3].weather[0].icon)
-        self.thirdDayTitle.text = "\(weather.daily[3].weather[0].main)"
-
-        // Update the UI with information about the fourth day in the forecast.
-        self.forthDayDate.text = "\(weather.daily[4].dt.toDate())"
-        self.forthTempMax.text = "/\(Int(weather.daily[4].temp.max))°"
-        self.forthTempMin.text = "\(Int(weather.daily[4].temp.min))°"
-        self.forthDayIcon.image = UIImage(named: weather.daily[4].weather[0].icon)
-        self.forthDayTitle.text = "\(weather.daily[4].weather[0].main)"
-
-        // Update the UI with information about the fifth day in the forecast.
-        self.fifthDayDate.text = "\(weather.daily[6].dt.toDate())"
-        self.fifthTempMax.text = "/\(Int(weather.daily[6].temp.max))°"
-        self.fifthTempMin.text = "\(Int(weather.daily[6].temp.min))°"
-        self.fifthDayIcon.image = UIImage(named: weather.daily[6].weather[0].icon)
-        self.fifthDayTitle.text = "\(weather.daily[6].weather[0].main)"
-
-        // Update the UI with information about the sixth day in the forecast.
-        self.sixthDayDate.text = "\(weather.daily[5].dt.toDate())"
-        self.sixthTempMax.text = "/\(Int(weather.daily[5].temp.max))°"
-        self.sixthTempMin.text = "\(Int(weather.daily[5].temp.min))°"
-        self.sixthDayIcon.image = UIImage(named: weather.daily[5].weather[0].icon)
-        self.sixthDayTitle.text = "\(weather.daily[5].weather[0].main)"
-        
-        // Update the UI with information about the seventh day in the forecast.
-        self.seventhDayDate.text = "\(weather.daily[7].dt.toDate())"
-        self.seventhTempMax.text = "/\(Int(weather.daily[7].temp.max))°"
-        self.seventhTempMin.text = "\(Int(weather.daily[7].temp.min))°"
-        self.seventhDayIcon.image = UIImage(named: weather.daily[7].weather[0].icon)
-        self.seventhDayTitle.text = "\(weather.daily[7].weather[0].main)"
-        
         // Round the corners of the view that contains the 7-day forecast information.
         self.sevenDayForecastView.layer.cornerRadius = 10
     }
@@ -239,5 +146,46 @@ class CityDetailsViewController: UIViewController {
         self.present(alertContoller, animated: true, completion: nil)
     }
 
+}
 
+extension CityDetailsViewController: UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = twentyFourHourForecastCollectionView.dequeueReusableCell(withReuseIdentifier: "HourForecastCell", for: indexPath as IndexPath) as! HourForecastCollectionViewCell //P.S : This forced cast is one of the rare cases where a force cast is welcome. The code must not crash if everything is hooked up correctly. If it does it reveals a design mistake.
+        
+        // Fill the first hour title label with the time of the first forecasted hour.
+        cell.setHourLabel(hour: weatherDetails.hourly[indexPath.row+1].dt.toTime())
+        // Fill the first hour icon image view with the icon corresponding to the forecasted weather.
+        cell.setWeatherIconImage(iconName: weatherDetails.hourly[indexPath.row+1].weather[0].icon)
+        // Fill the first hour temperature label with the temperature in Celsius degrees.
+        cell.setTempLabel(temp: weatherDetails.hourly[indexPath.row+1].temp)
+
+        return cell
+    }
+    
+    // This method specifies the size of each cell in the collection view.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 90, height: collectionView.bounds.size.height)
+    }
+
+    // -------------------
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = sevenDaysForecastTableView.dequeueReusableCell(withIdentifier: "DayForecastCell", for: indexPath as IndexPath) as! DayForecastTableViewCell //P.S : This forced cast is one of the rare cases where a force cast is welcome. The code must not crash if everything is hooked up correctly. If it does it reveals a design mistake.
+        
+        cell.setDateLabel(date: weatherDetails.daily[indexPath.row+1].dt.toDate()) // Convert Unix timestamp to a readable date string and set it as the text of a label.
+        cell.setTemperatureLabel(minTemp: weatherDetails.daily[indexPath.row+1].temp.min, maxTemp: weatherDetails.daily[indexPath.row+1].temp.max) // Set the maximum temperature for the day as the text of a label.
+        cell.setWeatherIconImage(iconName: weatherDetails.daily[indexPath.row+1].weather[0].icon) // Set the weather icon for the day as the image of an ImageView.
+        cell.setWeatherTitleLabel(weatherTitle: weatherDetails.daily[indexPath.row+1].weather[0].main) // Set the weather description for the day as the text of a label.
+
+        return cell
+    }
+    
+    
 }

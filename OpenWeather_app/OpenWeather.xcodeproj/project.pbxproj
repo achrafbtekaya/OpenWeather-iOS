@@ -24,6 +24,8 @@
 		522840E929BF263D00756001 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522840E829BF263C00756001 /* Weather.swift */; };
 		522840EB29BF2A0A00756001 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522840EA29BF2A0A00756001 /* Variables.swift */; };
 		522840ED29BF2C1000756001 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522840EC29BF2C1000756001 /* CityCollectionViewCell.swift */; };
+		523A2CC829C21C32006F28DD /* DayForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A2CC729C21C32006F28DD /* DayForecastTableViewCell.swift */; };
+		523A2CCC29C2252D006F28DD /* HourForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523A2CCB29C2252D006F28DD /* HourForecastCollectionViewCell.swift */; };
 		527DAC8B29BF5F32000A36B1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527DAC8A29BF5F32000A36B1 /* Extensions.swift */; };
 		527DAC9029BF6CDB000A36B1 /* CityDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527DAC8F29BF6CDB000A36B1 /* CityDataManagement.swift */; };
 		527DAC9329BF71C9000A36B1 /* CityData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 527DAC9129BF71C9000A36B1 /* CityData.xcdatamodeld */; };
@@ -97,6 +99,8 @@
 		522840E829BF263C00756001 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		522840EA29BF2A0A00756001 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		522840EC29BF2C1000756001 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
+		523A2CC729C21C32006F28DD /* DayForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayForecastTableViewCell.swift; sourceTree = "<group>"; };
+		523A2CCB29C2252D006F28DD /* HourForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourForecastCollectionViewCell.swift; sourceTree = "<group>"; };
 		527DAC8A29BF5F32000A36B1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		527DAC8F29BF6CDB000A36B1 /* CityDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDataManagement.swift; sourceTree = "<group>"; };
 		527DAC9229BF71C9000A36B1 /* Cities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cities.xcdatamodel; sourceTree = "<group>"; };
@@ -198,6 +202,8 @@
 				5228400529BEB60900756001 /* CityListViewController.swift */,
 				522840EC29BF2C1000756001 /* CityCollectionViewCell.swift */,
 				527DAC9429BF7C09000A36B1 /* CityDetailsViewController.swift */,
+				523A2CC729C21C32006F28DD /* DayForecastTableViewCell.swift */,
+				523A2CCB29C2252D006F28DD /* HourForecastCollectionViewCell.swift */,
 				5228400729BEB60900756001 /* Main.storyboard */,
 				5228400C29BEB60D00756001 /* LaunchScreen.storyboard */,
 			);
@@ -415,6 +421,7 @@
 			files = (
 				5228400629BEB60900756001 /* CityListViewController.swift in Sources */,
 				5228400229BEB60900756001 /* AppDelegate.swift in Sources */,
+				523A2CC829C21C32006F28DD /* DayForecastTableViewCell.swift in Sources */,
 				522840E729BF252C00756001 /* City.swift in Sources */,
 				522840EB29BF2A0A00756001 /* Variables.swift in Sources */,
 				527DAC9329BF71C9000A36B1 /* CityData.xcdatamodeld in Sources */,
@@ -423,6 +430,7 @@
 				5228408229BEB85800756001 /* SceneDelegate.swift in Sources */,
 				527DAC9729BF7D69000A36B1 /* CityDetailsViewModel.swift in Sources */,
 				522840E129BF1CF000756001 /* Contsants.swift in Sources */,
+				523A2CCC29C2252D006F28DD /* HourForecastCollectionViewCell.swift in Sources */,
 				522840ED29BF2C1000756001 /* CityCollectionViewCell.swift in Sources */,
 				527DAC9029BF6CDB000A36B1 /* CityDataManagement.swift in Sources */,
 				522840E929BF263D00756001 /* Weather.swift in Sources */,
