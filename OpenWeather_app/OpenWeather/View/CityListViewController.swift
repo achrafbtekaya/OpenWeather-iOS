@@ -108,8 +108,8 @@ extension CityListViewController: UICollectionViewDataSource, UICollectionViewDe
 
     // This method is responsible for setting up the city cells in the collection view.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = cityCollectionView.dequeueReusableCell(withReuseIdentifier: "CityCell", for: indexPath as IndexPath) as! CityCollectionViewCell
-
+        let cell = cityCollectionView.dequeueReusableCell(withReuseIdentifier: "CityCell", for: indexPath as IndexPath) as! CityCollectionViewCell //P.S : This forced cast is one of the rare cases where a force cast is welcome. The code must not crash if everything is hooked up correctly. If it does it reveals a design mistake.
+        
         // Set the name of the city in the cell.
         cell.setCityLabel(city: Variables.cityList[indexPath.row].name)
         // Set the country name of the city in the cell.
