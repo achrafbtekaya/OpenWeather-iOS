@@ -96,16 +96,28 @@ class CityDetailsViewController: UIViewController {
         cityDetailsViewModel.getCityWeatherDetails(
             latitude: Variables.cityList[self.indexPath.row].coord.lat,
             longitude: Variables.cityList[self.indexPath.row].coord.lon
-        ) { weather in
-            if weather != nil {
+        ) { data, error in
+            do {
+                guard let data = data else {
+                    // Display an error alert if the weather details could not be added
+                    self.navigationController?.popViewController(animated: true)
+                    let errMessage = "Reason : \(data?["message"] ?? "Server not reached. Please try later.")"
+                    self.showErrorAlert(message: errMessage)
+                    return
+                }
+                // Tries to decode the response data as a Weather object
+                let jsonData = try JSONSerialization.data(withJSONObject: data)
+                let weather = try JSONDecoder().decode(Weather.self, from: jsonData)
+                
                 // If the weather data is available, it will fill the views with the fetched data.
-                self.fillTodayView(weather: weather!)
-                self.fillTodayForecast(weather: weather!)
-                self.fillSevenDayForecast(weather: weather!)
-                self.fillAirCondition(weather: weather!)
-            } else {
-                // If there is an error while fetching the data, it will print an error message.
-                print("Error : getCityWeatherDetails")
+                self.fillTodayView(weather: weather)
+                self.fillTodayForecast(weather: weather)
+                self.fillSevenDayForecast(weather: weather)
+                self.fillAirCondition(weather: weather)
+            } catch {
+                let errMessage = "Reason : \(data?["message"] ?? "Server not reached. Please try later.")"
+                self.navigationController?.popViewController(animated: true)
+                self.showErrorAlert(message: errMessage)
             }
         }
     }
@@ -220,7 +232,12 @@ class CityDetailsViewController: UIViewController {
         self.airConditionView.layer.cornerRadius = 10
     }
 
-
+    // Display an alert to the user when an error occurs while adding a city
+    func showErrorAlert(message: String) {
+        let alertContoller = UIAlertController(title: "Unable to Load Weather Details", message: message, preferredStyle: .alert)
+        alertContoller.addAction(UIAlertAction(title: "OK", style:.default, handler: nil))
+        self.present(alertContoller, animated: true, completion: nil)
+    }
 
 
 }

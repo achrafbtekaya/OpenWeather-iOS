@@ -19,19 +19,12 @@ class CityDetailsViewModel {
     // This function retrieves the weather details for a specific city based on its latitude and longitude
     // It uses the OpenWeatherAPIs class to get the weather data
     // The callback function is used to pass the weather data to the view controller
-    func getCityWeatherDetails(latitude: Double, longitude: Double, callback: @escaping (Weather?) -> ()) {
+    func getCityWeatherDetails(latitude: Double, longitude: Double, callback: @escaping (NSDictionary?, NSError?) -> ()) {
         openweather.retreiveWeatherData(latitude, longitude) { result in
-            do {
-                if (result.error() != nil || result.data() == nil) {
-                    callback(nil)
-                } else {
-                    let jsonData = try JSONSerialization.data(withJSONObject: result.data()!)
-                    let weather = try JSONDecoder().decode(Weather.self, from: jsonData)
-                    callback(weather)
-                }
-            } catch let error as NSError {
-                print(error)
-                callback(nil)
+            if (result.error() != nil || result.data() == nil) {
+                callback(nil, result.error())
+            } else {
+                callback(result.data(), nil)
             }
         }
     }

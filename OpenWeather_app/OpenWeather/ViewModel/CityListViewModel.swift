@@ -23,23 +23,14 @@ class CityListViewModel {
     }
     
     // Gets the city information from its name
-    func getCityInfoFromName(cityName: String, callback: @escaping (City?) -> ()){
+    func getCityInfoFromName(cityName: String, callback: @escaping (NSDictionary?, NSError?) -> ()){
         openweather.findCityCoordinates(cityName) { result in
-            do {
-                // If the API request was unsuccessful, the callback returns nil
-                if (result.error() != nil || result.data() == nil) {
-                    callback(nil)
-                } else {
-                    // Tries to decode the response data as a City object
-                    let jsonData = try JSONSerialization.data(withJSONObject: result.data()!)
-                    let city = try JSONDecoder().decode(City.self, from: jsonData)
-                    // If successful, the callback returns the City object
-                    callback(city)
-                }
-            } catch let error as NSError {
-                // If an error occurred during decoding, the callback returns nil
-                print(error)
-                callback(nil)
+            // If the API request was unsuccessful, the callback returns nil
+            if (result.error() != nil || result.data() == nil) {
+                callback(nil, result.error())
+            } else {
+                // If successful, the callback returns the data
+                callback(result.data(), nil)
             }
         }
     }

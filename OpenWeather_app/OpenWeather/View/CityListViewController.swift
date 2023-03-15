@@ -52,13 +52,24 @@ class CityListViewController: UIViewController {
             print("City Name: \(cityname)")
             
             // Use the city list view model to get information about the city and add it to the list
-            self.cityListViewModel.getCityInfoFromName(cityName: cityname) { city in
-                if city != nil {
-                    self.cityListViewModel.addNewCity(city: city!)
+            self.cityListViewModel.getCityInfoFromName(cityName: cityname) { data, error in
+                do {
+                    guard let data = data else {
+                        // Display an error alert if the city could not be added
+                        let errMessage = "Reason : \(data?["message"] ?? "Server not reached. Please try later.")"
+                        self.showErrorAlert(message: errMessage)
+                        return
+                    }
+                    // Tries to decode the response data as a City object
+                    let jsonData = try JSONSerialization.data(withJSONObject: data)
+                    let city = try JSONDecoder().decode(City.self, from: jsonData)
+                    
+                    self.cityListViewModel.addNewCity(city: city)
                     self.cityCollectionView.reloadData()
-                } else {
-                    // Display an error alert if the city could not be added
-                    self.showErrorAlert()
+                } catch {
+                    print(error)
+                    let errMessage = "Reason : \(data?["message"] ?? "Server not reached. Please try later.")"
+                    self.showErrorAlert(message: errMessage)
                 }
             }
         })
@@ -71,10 +82,10 @@ class CityListViewController: UIViewController {
         // Present the alert controller to the user
         self.present(alertController, animated: true, completion: nil)
     }
-
+    
     // Display an alert to the user when an error occurs while adding a city
-    func showErrorAlert() {
-        let alertContoller = UIAlertController(title: "Unable to Add City", message: "An error occurred while adding this city. Please check your city name.", preferredStyle: .alert)
+    func showErrorAlert(message: String) {
+        let alertContoller = UIAlertController(title: "Unable to Add City", message: message, preferredStyle: .alert)
         alertContoller.addAction(UIAlertAction(title: "OK", style:.default, handler: nil))
         self.present(alertContoller, animated: true, completion: nil)
     }
